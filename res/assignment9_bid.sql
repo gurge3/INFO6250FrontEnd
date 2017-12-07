@@ -16,29 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role`
+-- Table structure for table `bid`
 --
 
-DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `bid`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(20) DEFAULT NULL,
-  `role_desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`role_id`),
-  UNIQUE KEY `idx_role_01` (`role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+CREATE TABLE `bid` (
+  `bid_id` int(11) NOT NULL AUTO_INCREMENT,
+  `idea_funding_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  PRIMARY KEY (`bid_id`),
+  KEY `bid_fk01_idx` (`idea_funding_id`),
+  KEY `bid_fk02_idx` (`user_id`),
+  KEY `bid_fk03_idx` (`payment_id`),
+  CONSTRAINT `bid_fk01` FOREIGN KEY (`idea_funding_id`) REFERENCES `idea_funding` (`idea_funding_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `bid_fk02` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `bid_fk03` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`payment_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `bid`
 --
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (11,'admindddddd','Manage All Users'),(22,'Third Role','This is the third role'),(23,'Fourth Role','This is the fourth role'),(24,'admin','manage all accounts'),(25,'startup','startup bid for services'),(26,'creator','creator creates new ideas'),(27,'funders','funder funds money for ideas');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+LOCK TABLES `bid` WRITE;
+/*!40000 ALTER TABLE `bid` DISABLE KEYS */;
+INSERT INTO `bid` VALUES (1,1,10,2);
+/*!40000 ALTER TABLE `bid` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

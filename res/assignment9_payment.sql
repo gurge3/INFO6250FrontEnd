@@ -16,29 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role`
+-- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(20) DEFAULT NULL,
-  `role_desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`role_id`),
-  UNIQUE KEY `idx_role_01` (`role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+CREATE TABLE `payment` (
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `credit_card_number` varchar(100) NOT NULL,
+  `credit_card_cvv` varchar(100) NOT NULL,
+  `credit_card_exp` date NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `payment_amount` int(11) NOT NULL,
+  PRIMARY KEY (`payment_id`),
+  KEY `payment_fk01_idx` (`user_id`),
+  CONSTRAINT `payment_fk01` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `payment`
 --
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (11,'admindddddd','Manage All Users'),(22,'Third Role','This is the third role'),(23,'Fourth Role','This is the fourth role'),(24,'admin','manage all accounts'),(25,'startup','startup bid for services'),(26,'creator','creator creates new ideas'),(27,'funders','funder funds money for ideas');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (1,'�\n�U��L�����','4�f�ߓ��:W.��','2019-12-31',10,100),(2,'�\n�U��L�����','4�f�ߓ��:W.��','2019-12-31',10,100);
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-07 13:35:47
+-- Dump completed on 2017-12-07 13:35:48

@@ -16,29 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role`
+-- Table structure for table `idea_funding`
 --
 
-DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `idea_funding`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(20) DEFAULT NULL,
-  `role_desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`role_id`),
-  UNIQUE KEY `idx_role_01` (`role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+CREATE TABLE `idea_funding` (
+  `idea_funding_id` int(11) NOT NULL AUTO_INCREMENT,
+  `idea_id` int(11) NOT NULL,
+  `idea_funding_availability` int(11) NOT NULL DEFAULT '0',
+  `idea_funding_service_amount` int(11) NOT NULL DEFAULT '0',
+  `idea_funding_desc` varchar(1000) NOT NULL,
+  `idea_funding_price` int(11) NOT NULL,
+  PRIMARY KEY (`idea_funding_id`),
+  KEY `idea_funding_fk01_idx` (`idea_id`),
+  CONSTRAINT `idea_funding_fk01` FOREIGN KEY (`idea_id`) REFERENCES `idea` (`idea_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `idea_funding`
 --
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (11,'admindddddd','Manage All Users'),(22,'Third Role','This is the third role'),(23,'Fourth Role','This is the fourth role'),(24,'admin','manage all accounts'),(25,'startup','startup bid for services'),(26,'creator','creator creates new ideas'),(27,'funders','funder funds money for ideas');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+LOCK TABLES `idea_funding` WRITE;
+/*!40000 ALTER TABLE `idea_funding` DISABLE KEYS */;
+INSERT INTO `idea_funding` VALUES (1,2,100,10,'10 Serivces for 100 dollars',100);
+/*!40000 ALTER TABLE `idea_funding` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

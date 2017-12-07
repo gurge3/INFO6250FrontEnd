@@ -16,29 +16,43 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role`
+-- Table structure for table `idea`
 --
 
-DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `idea`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(20) DEFAULT NULL,
-  `role_desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`role_id`),
-  UNIQUE KEY `idx_role_01` (`role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+CREATE TABLE `idea` (
+  `idea_id` int(11) NOT NULL AUTO_INCREMENT,
+  `idea_name` varchar(45) NOT NULL,
+  `idea_desc` varchar(1000) NOT NULL,
+  `idea_start_date` date NOT NULL,
+  `idea_end_date` date NOT NULL,
+  `idea_fund_expectation` int(11) NOT NULL,
+  `idea_fund_current` int(11) NOT NULL DEFAULT '0',
+  `idea_creator_id` int(11) NOT NULL,
+  `catagory_id` int(11) NOT NULL,
+  `idea_completion` int(11) NOT NULL DEFAULT '0',
+  `idea_status` varchar(45) NOT NULL DEFAULT 'HEALTH',
+  `idea_photo_url` varchar(45) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  `operation_reason` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idea_id`),
+  KEY `idea_fk01_idx` (`idea_creator_id`),
+  KEY `idea_fk02_idx` (`catagory_id`),
+  CONSTRAINT `idea_fk01` FOREIGN KEY (`idea_creator_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idea_fk02` FOREIGN KEY (`catagory_id`) REFERENCES `category` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `idea`
 --
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (11,'admindddddd','Manage All Users'),(22,'Third Role','This is the third role'),(23,'Fourth Role','This is the fourth role'),(24,'admin','manage all accounts'),(25,'startup','startup bid for services'),(26,'creator','creator creates new ideas'),(27,'funders','funder funds money for ideas');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+LOCK TABLES `idea` WRITE;
+/*!40000 ALTER TABLE `idea` DISABLE KEYS */;
+INSERT INTO `idea` VALUES (2,'New Idea','This is the first idea','2017-04-22','2018-04-22',1000000,0,9,1,0,'Available','http://baidu.com',NULL,NULL);
+/*!40000 ALTER TABLE `idea` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -16,29 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role`
+-- Table structure for table `category`
 --
 
-DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(20) DEFAULT NULL,
-  `role_desc` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`role_id`),
-  UNIQUE KEY `idx_role_01` (`role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(45) NOT NULL,
+  `startup_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`category_id`),
+  KEY `category_fk_01_idx` (`startup_id`),
+  CONSTRAINT `category_fk_01` FOREIGN KEY (`startup_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `category`
 --
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (11,'admindddddd','Manage All Users'),(22,'Third Role','This is the third role'),(23,'Fourth Role','This is the fourth role'),(24,'admin','manage all accounts'),(25,'startup','startup bid for services'),(26,'creator','creator creates new ideas'),(27,'funders','funder funds money for ideas');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (1,'Technology',NULL),(3,'Entertainment',NULL),(4,'Traffic',NULL);
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
